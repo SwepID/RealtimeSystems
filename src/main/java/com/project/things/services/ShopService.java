@@ -6,6 +6,7 @@ import com.project.things.entities.Shop;
 import com.project.things.entities.ShopChain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,7 @@ public class ShopService {
 
     @Autowired private ShopRepository repo;
     @Autowired private ShopChainRepository shopChainRepo;
-    
-    /*public String createShopChain(String name){
-        Shop shop = new Shop();
 
-        return "Создан!";
-    }*/
     public String createShop(Integer shopChain_id, String contacts){
         Shop shop = new Shop();
         ShopChain shopChain = shopChainRepo.getOne(shopChain_id);
