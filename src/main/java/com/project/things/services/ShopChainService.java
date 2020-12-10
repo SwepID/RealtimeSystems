@@ -26,7 +26,6 @@ public class ShopChainService {
     }
     public ShopChain getShopChainById(Integer id){
         ShopChain shopChain = repo.getOne(id);
-        Gson gson = new Gson();
         return shopChain;
     }
     public ShopChain getShopChainByName(String name){

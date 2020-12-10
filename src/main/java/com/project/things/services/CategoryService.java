@@ -31,6 +31,7 @@ public class CategoryService {
     public Category getCategory(Integer category_id){
         return repo.getOne(category_id);
     }
+
     public Category getCategoryByName(String name){
         Category category = repo.findAll().stream().filter(elem -> elem.getName() == name)
                 .findFirst().get();

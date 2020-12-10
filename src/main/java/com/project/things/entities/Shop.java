@@ -1,6 +1,5 @@
 package com.project.things.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Fetch;
 import org.springframework.stereotype.Repository;
 
