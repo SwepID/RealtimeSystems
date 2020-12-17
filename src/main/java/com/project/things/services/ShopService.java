@@ -22,33 +22,31 @@ public class ShopService {
     @Autowired private ShopRepository repo;
     @Autowired private ShopChainRepository shopChainRepo;
 
-    public String createShop(Integer shopChain_id, String contacts){
+    public Shop createShop(Integer shopChain_id, String contacts){
         Shop shop = new Shop();
-        ShopChain shopChain = shopChainRepo.getOne(shopChain_id);
+        ShopChain shopChain = shopChainRepo.findById(shopChain_id).get();
         shop.setShopChain(shopChain);
         shop.setContacts(contacts);
         repo.save(shop);
-        return  shop.toString();
+        return shop;
     }
 
     public Shop getShopById(Integer shop_id){
-        return repo.getOne(shop_id);
+        return repo.findById(shop_id).get();
     }
 
     public List<Shop> getAllShops(){
-        List<Shop> shops;
         return repo.findAll();
     }
 
     public Shop updateShop(Integer shop_id, Integer newShopChain_id, String newContacts){
-        Shop shop = repo.getOne(shop_id);
-        ShopChain shopChain = shopChainRepo.getOne(newShopChain_id);
+        Shop shop = repo.findById(shop_id).get();
+        ShopChain shopChain = shopChainRepo.findById(shop_id).get();
         shop.setShopChain(shopChain);
         shop.setContacts(newContacts);
         return repo.save(shop);
     }
-    public String deleteShop(Integer shop_id){
+    public void deleteShop(Integer shop_id){
         repo.deleteById(shop_id);
-        return "success";
     }
 }

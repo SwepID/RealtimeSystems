@@ -24,13 +24,13 @@ public class ItemService {
         Item item = new Item();
         item.setName(name);
         item.setDescription(description);
-        Category category = categoryRepository.getOne(category_id);
+        Category category = categoryRepository.findById(category_id).get();
         item.setCategory(category);
         return repo.save(item);
     }
 
     public Item getItemById(Integer id){
-        return repo.getOne(id);
+        return repo.findById(id).get();
     }
     public List<Item> getAllItems(){
         return repo.findAll();
@@ -39,16 +39,15 @@ public class ItemService {
         return repo.findAll().stream().filter(elem -> elem.getName() == name).findFirst().get();
     }
     public Item updateItem(Integer item_id, String newName, String newDescription, Integer newCategoryId){
-        Item item = repo.getOne(item_id);
+        Item item = repo.findById(item_id).get();
         item.setName(newName);
         item.setDescription(newDescription);
-        Category category = categoryRepository.getOne(newCategoryId);
+        Category category = categoryRepository.findById(newCategoryId).get();
         item.setCategory(category);
         return repo.save(item);
     }
-    public String deleteItem(Integer item_id){
+    public void deleteItem(Integer item_id){
         repo.deleteById(item_id);
-        return "success";
     }
 
 }

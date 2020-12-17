@@ -1,9 +1,7 @@
 package com.project.things.services;
 
-import com.google.gson.Gson;
 import com.project.things.dao.ShopChainRepository;
 import com.project.things.entities.ShopChain;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +23,7 @@ public class ShopChainService {
         return shopChain;
     }
     public ShopChain getShopChainById(Integer id){
-        ShopChain shopChain = repo.getOne(id);
+        ShopChain shopChain = repo.findById(id).get();
         return shopChain;
     }
     public ShopChain getShopChainByName(String name){
@@ -38,14 +36,13 @@ public class ShopChainService {
     }
 
     public ShopChain updateShopChainById(Integer id, String newName, String newWebSite){
-        ShopChain shopChain = repo.getOne(id);
+        ShopChain shopChain = repo.findById(id).get();
         shopChain.setShopChainName(newName);
         shopChain.setWebsite(newWebSite);
         return repo.save(shopChain);
     }
-    public String deleteShopChainById(Integer id){
+    public void deleteShopChainById(Integer id){
         repo.deleteById(id);
-        return "success";
     }
     public List<String> getAllShopsAndShopChains(){
         return repo.getAllShopsAndShopChains();

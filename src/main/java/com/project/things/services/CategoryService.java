@@ -21,7 +21,7 @@ public class CategoryService {
     ShopRepository shopRepository;
 
     public Category createCategory(Integer shop_id, String name){
-        Shop shop = shopRepository.getOne(shop_id);
+        Shop shop = shopRepository.findById(shop_id).get();
         Category category = new Category();
         category.setName(name);
         category.setShop(shop);
@@ -29,7 +29,7 @@ public class CategoryService {
     }
 
     public Category getCategory(Integer category_id){
-        return repo.getOne(category_id);
+        return repo.findById(category_id).get();
     }
 
     public Category getCategoryByName(String name){
@@ -43,15 +43,14 @@ public class CategoryService {
     }
 
     public Category updateCategory(Integer category_id, Integer newShopId, String newName){
-        Category category = repo.getOne(category_id);
-        Shop shop = shopRepository.getOne(newShopId);
+        Category category = repo.findById(category_id).get();
+        Shop shop = shopRepository.findById(newShopId).get();
         category.setShop(shop);
         category.setName(newName);
         return repo.save(category);
     }
 
-    public String deleteCategory(Integer category_id){
+    public void deleteCategory(Integer category_id){
         repo.deleteById(category_id);
-        return "success";
     }
 }

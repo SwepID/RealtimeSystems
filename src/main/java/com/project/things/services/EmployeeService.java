@@ -25,12 +25,12 @@ public class EmployeeService {
         employee.setSname(sname);
         employee.setPosition(position);
         employee.setSalary(salary);
-        Shop shop = shopRepository.getOne(shop_id);
+        Shop shop = shopRepository.findById(shop_id).get();
         employee.setShop(shop);
         return repo.save(employee);
     }
     public Employee getEmployeeById(Integer employee_id){
-        return repo.getOne(employee_id);
+        return repo.findById(employee_id).get();
     }
 
     public Employee getEmployeeByFnameAndSname(String fname, String sname){
@@ -44,8 +44,8 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Integer employee_id, String newFname, String newPosition, Integer newSalary, String newSname, Integer newShopId){
-        Shop shop = shopRepository.getOne(newShopId);
-        Employee employee = repo.getOne(employee_id);
+        Shop shop = shopRepository.findById(newShopId).get();
+        Employee employee = repo.findById(employee_id).get();
         employee.setFname(newFname);
         employee.setPosition(newPosition);
         employee.setSalary(newSalary);
@@ -54,8 +54,7 @@ public class EmployeeService {
         return repo.save(employee);
     }
 
-    public String deleteEmployee(Integer employee_id){
+    public void deleteEmployee(Integer employee_id){
         repo.deleteById(employee_id);
-        return "success";
     }
 }
