@@ -13,6 +13,7 @@ public class StatisticsLogic {
 
     double getMean() {
         double sum = 0.0;
+        int nansCount = 0;
         for (double a : data)
             sum += a;
         return sum / size;
